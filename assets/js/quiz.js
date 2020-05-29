@@ -111,11 +111,11 @@ function startQuiz() {
     quizChallengePage.style.display = "none";
     quizQuestionsPage.style.display = "block";
 
-    var timerInterval = setInterval(function () {
+    let timerInterval = setInterval(function () {
         secondsLeft--;
         timer.textContent = `Time: ${secondsLeft}`;
 
-        if (secondsLeft === 0 || (quizQuestions.length === (questionIndex + 1))) {
+        if (secondsLeft === 0 || (quizQuestions.length === questionIndex)) {
             clearInterval(timerInterval);
             showFinalScore();
         }
@@ -125,7 +125,7 @@ function startQuiz() {
 let questionIndex = 0;
 
 function showQuestions() {
-    var q = quizQuestions[questionIndex];
+    let q = quizQuestions[questionIndex];
 
     quizQuestionHeader.innerHTML = q.quizQuestionHeader;
     choice1.innerHTML = q.one;
