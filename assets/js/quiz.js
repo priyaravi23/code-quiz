@@ -8,8 +8,10 @@ let arrayOfHighscores = localStorage.getItem("saveUserScoreLocal");
 
 function init() {
     let goBackBtn = document.getElementById("goBack");
-    let clearHighScoreBtn = document.getElementById("clearHighScore");
     let ol = document.getElementById('list');
+    let clearHighScoreBtn = document.getElementById("clearHighScore");
+    let highScoreList = document.getElementById('highScoreList');
+    let scoreContainer = document.querySelector('#score-container');
 
     // Go back to coding quiz challenge
     goBackBtn.addEventListener('click', (e) => {
@@ -26,7 +28,11 @@ function init() {
         while (ol.firstChild) {
             ol.removeChild(ol.firstChild);
         }
-        clearHighScoreBtn.disabled = true;
+
+        if (!ol.hasChildNodes()) {
+            clearHighScoreBtn.disabled = true;
+            scoreContainer.removeChild(highScoreList);
+        }
     });
 
     // Create a list item display the details for each submitted score
@@ -48,6 +54,8 @@ let choice2 = document.getElementById("two");
 let choice3 = document.getElementById("three");
 let choice4 = document.getElementById("four");
 let answerResponse = document.querySelector("#answerResponse");
+let hrDiv = document.getElementById('div-hr');
+let hrElem = document.createElement('HR');
 
 let finalScoreIs = document.querySelector("#finalScoreIs");
 let quizQuestionsPage = document.querySelector("#quizQuestionsPage");
@@ -164,6 +172,8 @@ function checkAnswer(event) {
 
     let answer = event.currentTarget.dataset.answer;
     let correctAnswer = null;
+    hrElem.classList.add('hr-style');
+    hrDiv.appendChild(hrElem);
 
     if (quizQuestions[questionIndex].correct === answer) {
         correctAnswer = answer;
@@ -194,6 +204,7 @@ function showFinalScore() {
     quizQuestionsPage.style.display = "none";
     answerResponse.style.display = "none";
     finalScorePage.style.display = "block";
+    hrDiv.removeChild(hrElem);
 
     if (startScore === 0 || quizQuestions.length - 1) {
         finalScoreIs.textContent = `Your final score is ${secondsLeft}`;
