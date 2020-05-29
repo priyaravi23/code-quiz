@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Code Quiz</title>
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css"/>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+<nav class="header">
+    <div class="card-body justify-content-end">
+        <a id="score" href="./score.html">View High Scores</a>
+        <a id="timer"></a>
+    </div>
+</nav>
+
+<main class="container">
+
+    <div class="quizChallengePage">
+        <h1 id="start">Coding Quiz Challenge</h1>
+        <p id="explanation">Try to answer the following code-related questions within 80 seconds. Every incorrect answers will penalize your time by ten seconds"</p>
+
+        <button id="submitButton" class ="btn active" type="button">Start Quiz</button>
+    </div>
+
+    <div id="quizQuestionsPage">
+        <h2 id="quizQuestionHeader"></h2>
+        <ul>
+            <li><button type="button" class="btn questionButton" id="one"></button></li>
+            <li><button type="button" class="btn questionButton" id="two"></button></li>
+            <li><button type="button" class="btn questionButton" id="three"></button></li>
+            <li><button type="button" class="btn questionButton" id="four"></button></li>
+            <li><button id="correct"></button></li>
+        </ul>
+    </div>
+
+        <div id="answerResponse"></div>
+
+        <div class="finalScorePage">
+            <h2 id="allDone">All done!</h2>
+            <div id="finalScoreIs"></div>
+            <form class="row">
+                <div class="form-inline">
+                    <label for="text" id="initials" class="col col-form-label input-group"></label>
+                    <div>
+                        <input title="initialInput" type="text" class="col form-control" id="initialInput">
+                        <a href="./score.html"><button class="btn" type="button" id="initialButton"></button></a>
+                    </div>
+                </div>
+            </form>
+        </div>
+</main>
+
+<script src="./assets/js/quiz.js" type="text/javascript"></script>
+</body>
+</html>

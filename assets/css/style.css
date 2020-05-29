@@ -1,0 +1,137 @@
+/* Overall Styling */
+
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    font-family: "Josefin Sans", sans-serif;
+}
+
+.body {
+    text-align: center;
+}
+
+h1 {
+    padding-top: 150px;
+    font-weight: bold !important;
+    font-size: 40px;
+    font-weight: bolder;
+}
+
+p {
+    padding: 20px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.btn {
+    text-align: center !important;
+    background-color: #8064A2 !important;
+    border-color: #8064A2 !important;
+    color: white !important;
+    font-size: 22px !important;
+    padding: 0px 12px 0px 12px !important;
+}
+
+.btn:hover {
+    text-align: center !important;
+    background-color: #ba94e7  !important;
+    border-color: #ba94e7 !important;
+    color: white !important;
+    font-size: 22px !important;
+    padding: 0px 12px 0px 12px !important;
+}
+
+/* Nav Bar */
+#score {
+    color:#8064A2;
+    padding-left: 20px;
+}
+
+#timer {
+    float: right;
+    padding-right: 30px;
+}
+
+/* Coding Quiz Challenge Page */
+
+.quizChallengePage {
+    align-items: center !important;
+    text-align: center !important;
+}
+
+#quizQuestionHeader {
+    font-size: 25px;
+    font-weight: bolder;
+    padding-top: 100px;
+    padding-left: 15%;
+    padding-bottom: 15px;
+}
+
+/* Quiz Question Page */
+li {
+    list-style-type: none;
+    padding-left: 15%;
+}
+
+.questionButton {
+    text-align: center !important;
+    background-color: #8064A2 !important;
+    border-color: #8064A2 !important;
+    color: white !important;
+    font-size: 22px !important;
+    padding: 0px 12px 0px 12px !important;
+    margin: 5px;
+}
+
+#answerResponse {
+    font-style: italic;
+    color: grey;
+    font-size: 30px;
+    padding-left: 15%;
+}
+
+/* High Score Page */
+
+#finalScoreIs {
+    padding-left: 15% !important;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#highScores {
+    text-align: left;
+    padding-top: 150px;
+    font-weight: bolder;
+    padding-left: 15%;
+    padding-top: none !important;
+}
+
+#highScoreButtons {
+    padding-left: 15%;
+}
+
+
+
+/* All Done Initial Page */
+
+.row {
+    align-items: center !important;
+    text-align: center !important;
+    padding-left: 15% !important;
+}
+
+#allDone {
+    font-weight: bolder;
+    padding-top: 100px;
+    padding-left: 15% !important;
+}
+
+/* High Score Page */
+
+#highScoreList {
+    background-color: lavender;
+    padding-left: 15%;
+    font-size: 15px;
+}
