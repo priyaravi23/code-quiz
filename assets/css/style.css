@@ -1,9 +1,7 @@
-/* Overall Styling */
-
 * {
     box-sizing: border-box;
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     font-family: "Josefin Sans", sans-serif;
 }
 
@@ -11,11 +9,17 @@
     text-align: center;
 }
 
-h1 {
+.h1-text {
     padding-top: 150px;
-    font-weight: bold !important;
+    font-weight: bold;
     font-size: 40px;
-    font-weight: bolder;
+}
+
+.score-text {
+    padding-top: 200px;
+    font-weight: bold;
+    font-size: 40px;
+    padding-left: 18%;
 }
 
 p {
@@ -33,7 +37,7 @@ p {
     padding: 0px 12px 0px 12px !important;
 }
 
-.btn:hover {
+.btn:hover:enabled {
     text-align: center !important;
     background-color: #ba94e7  !important;
     border-color: #ba94e7 !important;
@@ -42,7 +46,6 @@ p {
     padding: 0px 12px 0px 12px !important;
 }
 
-/* Nav Bar */
 #score {
     color:#8064A2;
     padding-left: 20px;
@@ -53,11 +56,9 @@ p {
     padding-right: 30px;
 }
 
-/* Coding Quiz Challenge Page */
-
 .quizChallengePage {
-    align-items: center !important;
-    text-align: center !important;
+    align-items: center;
+    text-align: center;
 }
 
 #quizQuestionHeader {
@@ -68,8 +69,7 @@ p {
     padding-bottom: 15px;
 }
 
-/* Quiz Question Page */
-li {
+.li-qs {
     list-style-type: none;
     padding-left: 15%;
 }
@@ -91,8 +91,6 @@ li {
     padding-left: 15%;
 }
 
-/* High Score Page */
-
 #finalScoreIs {
     padding-left: 15% !important;
     padding: 20px;
@@ -102,36 +100,67 @@ li {
 
 #highScores {
     text-align: left;
-    padding-top: 150px;
     font-weight: bolder;
-    padding-left: 15%;
-    padding-top: none !important;
 }
 
 #highScoreButtons {
     padding-left: 15%;
 }
 
-
-
-/* All Done Initial Page */
-
 .row {
     align-items: center !important;
     text-align: center !important;
+    padding-left: 10% !important;
+}
+
+.initials {
     padding-left: 15% !important;
 }
 
 #allDone {
     font-weight: bolder;
     padding-top: 100px;
-    padding-left: 15% !important;
+    padding-left: 15%;
 }
-
-/* High Score Page */
 
 #highScoreList {
     background-color: lavender;
-    padding-left: 15%;
-    font-size: 15px;
+    width: 70%;
+    margin-left: 18%;
+}
+
+#list {
+    list-style-type: none;
+}
+
+@media screen and (max-width: 980px) {
+    .row {
+        align-items: center !important;
+        text-align: center !important;
+        padding-left: 15% !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .row {
+        align-items: center !important;
+        text-align: center !important;
+        padding-left: 14% !important;
+    }
+
+    .initials {
+        padding-left: 16% !important;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .row {
+        align-items: center !important;
+        text-align: center !important;
+        padding-left: 14% !important;
+    }
+
+    .initials {
+        padding-left: 14% !important;
+    }
 }

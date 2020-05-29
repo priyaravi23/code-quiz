@@ -9,7 +9,7 @@ let arrayOfHighscores = localStorage.getItem("saveUserScoreLocal");
 function init() {
     let goBackBtn = document.getElementById("goBack");
     let clearHighScoreBtn = document.getElementById("clearHighScore");
-    let ul = document.getElementById("highScoreList");
+    let ol = document.getElementById('list');
 
     // Go back to coding quiz challenge
     goBackBtn.addEventListener('click', (e) => {
@@ -23,9 +23,10 @@ function init() {
     clearHighScoreBtn.addEventListener('click', () => {
         localStorage.clear();
 
-        while (ul.firstChild) {
-            ul.removeChild(ul.firstChild);
+        while (ol.firstChild) {
+            ol.removeChild(ol.firstChild);
         }
+        clearHighScoreBtn.disabled = true;
     });
 
     // Create a list item display the details for each submitted score
@@ -34,12 +35,12 @@ function init() {
     for (let i = 0; i < arrayOfHighscores.length; i++) {
         let highscoreLine = arrayOfHighscores[i];
         let li = document.createElement('li');
-        li.textContent = `${highscoreLine.name} - ${highscoreLine.score}`;
-        ul.appendChild(li);
+        li.textContent = `${i + 1}. ${highscoreLine.name} - ${highscoreLine.score}`;
+        ol.appendChild(li);
     }
 }
 
-let submitButton = document.querySelector("#submitButton");
+let startBtn = document.querySelector("#startBtn");
 
 let quizQuestionHeader = document.querySelector("#quizQuestionHeader");
 let choice1 = document.getElementById("one");
@@ -97,11 +98,14 @@ let quizQuestions = [
 quizQuestionsPage.style.display = "none";
 finalScorePage.style.display = "none";
 
-submitButton.addEventListener("click", startQuiz);
+startBtn.addEventListener("click", startQuiz);
 
-let secondsLeft = 80;
+let secondsLeft = 75;
 let startScore = 0;
+let questionIndex = 0;
 let timer = document.getElementById("timer");
+let timerInterval;
+let timerRunning = true;
 
 // holder text in nav bar
 timer.textContent = `Time: ${startScore}`;
@@ -111,18 +115,18 @@ function startQuiz() {
     quizChallengePage.style.display = "none";
     quizQuestionsPage.style.display = "block";
 
-    let timerInterval = setInterval(function () {
-        secondsLeft--;
+    timerInterval = setInterval(function () {
         timer.textContent = `Time: ${secondsLeft}`;
-
-        if (secondsLeft === 0 || (quizQuestions.length === questionIndex)) {
+        if (timerRunning === false) {
             clearInterval(timerInterval);
+        }
+        if (secondsLeft === 0) {
             showFinalScore();
+        } else {
+            secondsLeft--;
         }
     }, 1000);
 }
-
-let questionIndex = 0;
 
 function showQuestions() {
     let q = quizQuestions[questionIndex];
@@ -193,19 +197,22 @@ function showFinalScore() {
 
     if (startScore === 0 || quizQuestions.length - 1) {
         finalScoreIs.textContent = `Your final score is ${secondsLeft}`;
+        timerRunning = false;
     }
 }
 
-let initialButton = document.querySelector("#initialButton");
+let submitBtn = document.querySelector("#submitBtn");
 let initials = document.querySelector("#initials");
 let initialInput = document.querySelector("#initialInput");
 let getInitials;
 
-initialButton.textContent = "Submit";
+submitBtn.textContent = "Submit";
 initials.textContent = "Enter Your Initials: ";
 
-initialButton.addEventListener("click", function () {
+submitBtn.addEventListener("click", function () {
+    window.location.href = './score.html';
     getInitials = initialInput.value;
+    secondsLeft = secondsLeft + 1;
 
     localStorage.setItem("initials", getInitials);
     localStorage.setItem("secondsLeft", secondsLeft);
