@@ -1,67 +1,31 @@
-document.addEventListener('readystatechange', () => {
-    if (document.readyState === 'interactive') {
-        init();
-    }
-});
+const quizChallengePage = document.querySelector(".quizChallengePage");
+const startBtn = document.querySelector("#startBtn");
 
+const quizQuestionsPage = document.querySelector("#quizQuestionsPage");
+const quizQuestionHeader = document.querySelector("#quizQuestionHeader");
+const choice1 = document.getElementById("one");
+const choice2 = document.getElementById("two");
+const choice3 = document.getElementById("three");
+const choice4 = document.getElementById("four");
+
+const answerResponse = document.querySelector("#answerResponse");
+const finalScorePage = document.querySelector(".finalScorePage");
+const finalScoreIs = document.querySelector("#finalScoreIs");
+
+const hrDiv = document.getElementById('div-hr');
+const hrElem = document.createElement('HR');
 let arrayOfHighscores = localStorage.getItem("saveUserScoreLocal");
 
-function init() {
-    let goBackBtn = document.getElementById("goBack");
-    let ol = document.getElementById('list');
-    let clearHighScoreBtn = document.getElementById("clearHighScore");
-    let highScoreList = document.getElementById('highScoreList');
-    let scoreContainer = document.querySelector('#score-container');
+let secondsLeft = 75;
+let startScore = 0;
+let questionIndex = 0;
+let timer = document.getElementById("timer");
+let timerInterval;
+let timerRunning = true;
 
-    // Go back to coding quiz challenge
-    goBackBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.location.href = './index.html';
-
-    });
-
-    // clear the local storage and the list of high scores
-
-    clearHighScoreBtn.addEventListener('click', () => {
-        localStorage.clear();
-
-        while (ol.firstChild) {
-            ol.removeChild(ol.firstChild);
-        }
-
-        if (!ol.hasChildNodes()) {
-            clearHighScoreBtn.disabled = true;
-            scoreContainer.removeChild(highScoreList);
-        }
-    });
-
-    // Create a list item display the details for each submitted score
-    arrayOfHighscores = JSON.parse(arrayOfHighscores);
-
-    for (let i = 0; i < arrayOfHighscores.length; i++) {
-        let highscoreLine = arrayOfHighscores[i];
-        let li = document.createElement('li');
-        li.textContent = `${i + 1}. ${highscoreLine.name} - ${highscoreLine.score}`;
-        ol.appendChild(li);
-    }
-}
-
-let startBtn = document.querySelector("#startBtn");
-
-let quizQuestionHeader = document.querySelector("#quizQuestionHeader");
-let choice1 = document.getElementById("one");
-let choice2 = document.getElementById("two");
-let choice3 = document.getElementById("three");
-let choice4 = document.getElementById("four");
-let answerResponse = document.querySelector("#answerResponse");
-let hrDiv = document.getElementById('div-hr');
-let hrElem = document.createElement('HR');
-
-let finalScoreIs = document.querySelector("#finalScoreIs");
-let quizQuestionsPage = document.querySelector("#quizQuestionsPage");
-
-let quizChallengePage = document.querySelector(".quizChallengePage");
-let finalScorePage = document.querySelector(".finalScorePage");
+const submitBtn = document.querySelector("#submitBtn");
+const initials = document.querySelector("#initials");
+const initialInput = document.querySelector("#initialInput");
 
 // List of quiz questions
 let quizQuestions = [
@@ -103,17 +67,53 @@ let quizQuestions = [
     },
 ];
 
+document.addEventListener('readystatechange', () => {
+    if (document.readyState === 'interactive') {
+        init();
+    }
+});
+
+function init() {
+    const goBackBtn = document.getElementById("goBack");
+    const ol = document.getElementById('list');
+    const clearHighScoreBtn = document.getElementById("clearHighScore");
+    const highScoreList = document.getElementById('highScoreList');
+    const scoreContainer = document.querySelector('#score-container');
+
+    // Go back to coding quiz challenge page
+    goBackBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.location.href = './index.html';
+
+    });
+
+    // clear the local storage and the list of high scores
+    clearHighScoreBtn.addEventListener('click', () => {
+        localStorage.clear();
+
+        while (ol.firstChild) {
+            ol.removeChild(ol.firstChild);
+        }
+
+        if (!ol.hasChildNodes()) {
+            clearHighScoreBtn.disabled = true;
+            scoreContainer.removeChild(highScoreList);
+        }
+    });
+
+    // Create a list item and display the details for each submitted score
+    arrayOfHighscores = JSON.parse(arrayOfHighscores);
+
+    for (let i = 0; i < arrayOfHighscores.length; i++) {
+        let highscoreLine = arrayOfHighscores[i];
+        let li = document.createElement('li');
+        li.textContent = `${i + 1}. ${highscoreLine.name} - ${highscoreLine.score}`;
+        ol.appendChild(li);
+    }
+}
+
 quizQuestionsPage.style.display = "none";
 finalScorePage.style.display = "none";
-
-startBtn.addEventListener("click", startQuiz);
-
-let secondsLeft = 75;
-let startScore = 0;
-let questionIndex = 0;
-let timer = document.getElementById("timer");
-let timerInterval;
-let timerRunning = true;
 
 // holder text in nav bar
 timer.textContent = `Time: ${startScore}`;
@@ -122,6 +122,8 @@ function startQuiz() {
     finalScorePage.style.display = "none";
     quizChallengePage.style.display = "none";
     quizQuestionsPage.style.display = "block";
+
+    showQuestions();
 
     timerInterval = setInterval(function () {
         timer.textContent = `Time: ${secondsLeft}`;
@@ -149,23 +151,6 @@ function showQuestions() {
     choice4.innerHTML = q.four;
     choice4.setAttribute("data-answer", q.four);
 }
-
-showQuestions();
-choice1.addEventListener("click", function (event) {
-    checkAnswer(event);
-});
-
-choice2.addEventListener("click", function (event) {
-    checkAnswer(event);
-});
-
-choice3.addEventListener("click", function (event) {
-    checkAnswer(event);
-});
-
-choice4.addEventListener("click", function (event) {
-    checkAnswer(event);
-});
 
 function checkAnswer(event) {
     event.preventDefault();
@@ -212,34 +197,50 @@ function showFinalScore() {
     }
 }
 
-let submitBtn = document.querySelector("#submitBtn");
-let initials = document.querySelector("#initials");
-let initialInput = document.querySelector("#initialInput");
-let getInitials;
-
 submitBtn.textContent = "Submit";
 initials.textContent = "Enter Your Initials: ";
 
-submitBtn.addEventListener("click", function () {
+function saveHighScores() {
     window.location.href = './score.html';
-    getInitials = initialInput.value;
+    let getInitials = initialInput.value;
     secondsLeft = secondsLeft + 1;
 
     localStorage.setItem("initials", getInitials);
     localStorage.setItem("secondsLeft", secondsLeft);
 
-    var userScore = {
+    let userScore = {
         name: `${getInitials}`,
         score: `${secondsLeft}`
     };
 
     arrayOfHighscores.push(userScore);
     localStorage.setItem("saveUserScoreLocal", JSON.stringify(arrayOfHighscores));
-});
-
-if (!arrayOfHighscores) {
-    arrayOfHighscores = [];
-} else {
-    arrayOfHighscores = JSON.parse(arrayOfHighscores);
 }
 
+function loadHighScores() {
+    if (!arrayOfHighscores) {
+        arrayOfHighscores = [];
+    } else {
+        arrayOfHighscores = JSON.parse(arrayOfHighscores);
+    }
+}
+
+startBtn.addEventListener('click', startQuiz);
+submitBtn.addEventListener('click', saveHighScores);
+choice1.addEventListener('click', (event) => {
+    checkAnswer(event);
+});
+
+choice2.addEventListener('click', (event) => {
+    checkAnswer(event);
+});
+
+choice3.addEventListener('click', (event) => {
+    checkAnswer(event);
+});
+
+choice4.addEventListener('click', (event) => {
+    checkAnswer(event);
+});
+
+loadHighScores();
